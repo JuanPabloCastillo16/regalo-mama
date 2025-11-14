@@ -351,9 +351,123 @@
       .message { top:30%; }
       .message h1 { font-size:clamp(1.5rem, 6vw, 3rem); }
     }
+    
+    /* Sobre inicial */
+    .envelope-container {
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:#001f3f;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:100;
+      transition:opacity 0.8s ease-out, visibility 0.8s ease-out;
+    }
+    .envelope-container.hidden {
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+    }
+    .envelope {
+      position:relative;
+      width:280px;
+      height:200px;
+      cursor:pointer;
+      animation:envelope-float 3s ease-in-out infinite;
+    }
+    .envelope:hover {
+      transform:scale(1.05);
+    }
+    .envelope-back {
+      position:absolute;
+      bottom:0;
+      left:0;
+      width:100%;
+      height:60%;
+      background:#e8d5c4;
+      border:3px solid #c4a982;
+      border-radius:8px;
+    }
+    .envelope-flap {
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:50%;
+      background:#f4e4d7;
+      border:3px solid #c4a982;
+      clip-path:polygon(0 0, 50% 70%, 100% 0);
+      transform-origin:top center;
+      transition:transform 0.6s ease-out;
+      z-index:2;
+    }
+    .envelope.opening .envelope-flap {
+      transform:rotateX(180deg);
+    }
+    .envelope-front {
+      position:absolute;
+      bottom:0;
+      left:0;
+      width:100%;
+      height:60%;
+      background:#f4e4d7;
+      border:3px solid #c4a982;
+      border-radius:8px;
+      z-index:1;
+    }
+    .envelope-label {
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      font-family:'Fredoka One', cursive;
+      font-size:2rem;
+      color:#ff69b4;
+      text-shadow:2px 2px 0 rgba(0,0,0,.1);
+      z-index:3;
+      pointer-events:none;
+    }
+    .envelope-heart {
+      position:absolute;
+      top:15%;
+      right:10%;
+      width:30px;
+      height:30px;
+      z-index:3;
+      pointer-events:none;
+    }
+    @keyframes envelope-float {
+      0%, 100% { transform:translateY(0); }
+      50% { transform:translateY(-15px); }
+    }
+    
+    /* Ocultar contenido hasta que se abra el sobre */
+    body.envelope-closed .fireflies,
+    body.envelope-closed .message,
+    body.envelope-closed .garden,
+    body.envelope-closed .beagle {
+      display:none;
+    }
   </style>
 </head>
-<body>
+<body class="envelope-closed">
+  <!-- Sobre inicial -->
+  <div class="envelope-container" id="envelopeContainer">
+    <div class="envelope" id="envelope">
+      <div class="envelope-back"></div>
+      <div class="envelope-flap"></div>
+      <div class="envelope-front"></div>
+      <div class="envelope-label">¡Ábreme!</div>
+      <svg class="envelope-heart" viewBox="0 0 32 32">
+        <path d="M16 28 q-10 -8 -14 -14 q-2 -4 0 -8 q2 -4 6 -4 q3 0 6 3 q0 0 2 2 q2 -2 2 -2 q3 -3 6 -3 q4 0 6 4 q2 4 0 8 q-4 6 -14 14z" 
+              fill="#ff69b4"/>
+      </svg>
+    </div>
+  </div>
+
   hola
   
   <!-- Luciérnagas -->
@@ -540,5 +654,20 @@
       <circle cx="130" cy="102" r="4" fill="#111"/>
     </svg>
   </div>
+
+  <script>
+    const envelope = document.getElementById('envelope');
+    const envelopeContainer = document.getElementById('envelopeContainer');
+    const body = document.body;
+
+    envelope.addEventListener('click', function() {
+      envelope.classList.add('opening');
+      
+      setTimeout(() => {
+        envelopeContainer.classList.add('hidden');
+        body.classList.remove('envelope-closed');
+      }, 800);
+    });
+  </script>
 </body>
 </html>
