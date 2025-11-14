@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Hola</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <style>
+    body {
+      background:#001f3f;
+      font-family:'Poppins', sans-serif;
+      color:#fff;
+      position:relative;
+      min-height:100vh;
+      overflow:hidden;
+    }
+    :root {
+      --tulip-scale:2;
+    }
+    .garden {
+      position:absolute;
+      bottom:0;
+      left:50%;
+      transform:translateX(-50%) scale(var(--tulip-scale));
+      transform-origin:bottom center;
+      display:flex;
+      gap:28px;
+      justify-content:center;
+      perspective:700px;
+      padding-bottom:env(safe-area-inset-bottom);
+    }
+    .tulip {
+      position:relative;
+      width:40px;
+      height:200px;
+      transform-origin:bottom center;
+      animation:lift 1.2s ease-out forwards, sway 4s 1.3s ease-in-out infinite;
+      opacity:0;
+      z-index:auto;
+      overflow:visible;
+    }
+    .stem {
+      position:absolute;
+      left:50%;
+      top:40px;
+      width:6px;
+      height:150px;
+      transform:translateX(-50%);
+      border-radius:3px;
+      box-shadow:0 0 4px rgba(0,0,0,.3);
+      background:linear-gradient(#1a8c36,#0e4d1d);
+    }
+    .bud {
+      position:absolute;
+      left:50%;
+      top:0;
+      width:46px;
+      height:70px;
+      display:flex;
+      justify-content:center;
+      align-items:flex-end;
+      filter:drop-shadow(0 4px 6px rgba(0,0,0,.35));
+      transform:translateX(-50%);
+    }
+    .petal {
+      position:absolute;
+      bottom:0;
+      width:34px;
+      height:56px;
+      border-radius:50% 50% 42% 42%;
+      filter:none;
+      box-shadow:none;
+      animation:none;
+    }
+    .petal.back {
+      left:50%;
+      transform:translateX(-50%) translateY(2px);
+      background:radial-gradient(circle at 60% 25%, #ffe98a 0%, #ffd545 60%, #e0a800 100%);
+      opacity:.6;
+    }
+    .petal.left {
+      left:-6px;
+      transform:rotate(-14deg);
+      background:radial-gradient(circle at 35% 25%, #fff9c4 0%, #ffe168 45%, #ffc800 80%, #e0a800 100%);
+    }
+    .petal.right {
+      right:-6px;
+      transform:rotate(14deg);
+      background:radial-gradient(circle at 65% 25%, #fff9c4 0%, #ffe168 45%, #ffc800 80%, #e0a800 100%);
+    }
+    .petal.center {
+      left:50%;
+      transform:translateX(-50%);
+      width:30px;
+      height:58px;
+      background:radial-gradient(circle at 50% 20%, #fffdd1 0%, #ffe773 35%, #ffc600 80%, #e0b200 100%);
+      z-index:3;
+    }
+    .leaf {
+      position:absolute;
+      bottom:10px;
+      width:60px;
+      height:50px;
+      background:linear-gradient(135deg,#1fa34a,#0d5f28);
+      clip-path:ellipse(50% 40% at 50% 50%);
+      opacity:.9;
+    }
+    .leaf-left {left:-20px; transform:rotate(-28deg);}
+    .leaf-right {right:-20px; transform:rotate(28deg);}
+    @keyframes lift {
+      0% {transform:translateY(40px) scale(.85) rotateX(-50deg); opacity:0;}
+      60% {opacity:1;}
+      100% {transform:translateY(0) scale(1) rotateX(0deg); opacity:1;}
+    }
+    @keyframes sway {
+      0%,100% {transform:translateY(0) scale(1) rotateX(0deg) rotateZ(0deg);}
+      50% {transform:translateY(0) scale(1) rotateX(0deg) rotateZ(3deg);}
+    }
+    @media (max-width:600px) {
+      :root { --tulip-scale:1.2; }
+      .garden { gap:16px; bottom:12px; }
+      .tulip { height:150px; }
+      .stem  { top:30px; height:110px; }
+      .bud   { height:60px; }
+      .petal { height:48px; }
+      .petal.center { height:50px; }
+    }
+  </style>
+</head>
+<body>
+  hola
+  <div class="garden">
+    <div class="tulip">
+      <div class="stem"></div>
+      <div class="bud">
+        <span class="petal back"></span>
+        <span class="petal left"></span>
+        <span class="petal right"></span>
+        <span class="petal center"></span>
+      </div>
+      <div class="leaf leaf-left"></div>
+      <div class="leaf leaf-right"></div>
+    </div>
+    <div class="tulip">
+      <div class="stem"></div>
+      <div class="bud">
+        <span class="petal back"></span>
+        <span class="petal left"></span>
+        <span class="petal right"></span>
+        <span class="petal center"></span>
+      </div>
+      <div class="leaf leaf-left"></div>
+      <div class="leaf leaf-right"></div>
+    </div>
+    <div class="tulip">
+      <div class="stem"></div>
+      <div class="bud">
+        <span class="petal back"></span>
+        <span class="petal left"></span>
+        <span class="petal right"></span>
+        <span class="petal center"></span>
+      </div>
+      <div class="leaf leaf-left"></div>
+      <div class="leaf leaf-right"></div>
+    </div>
+    <div class="tulip">
+      <div class="stem"></div>
+      <div class="bud">
+        <span class="petal back"></span>
+        <span class="petal left"></span>
+        <span class="petal right"></span>
+        <span class="petal center"></span>
+      </div>
+      <div class="leaf leaf-left"></div>
+      <div class="leaf leaf-right"></div>
+    </div>
+    <div class="tulip">
+      <div class="stem"></div>
+      <div class="bud">
+        <span class="petal back"></span>
+        <span class="petal left"></span>
+        <span class="petal right"></span>
+        <span class="petal center"></span>
+      </div>
+      <div class="leaf leaf-left"></div>
+      <div class="leaf leaf-right"></div>
+    </div>
+  </div>
+</body>
+</html>
